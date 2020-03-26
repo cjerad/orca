@@ -18,11 +18,11 @@ package com.netflix.spinnaker.orca.clouddriver.tasks.instance
 
 import com.netflix.spinnaker.orca.api.pipeline.models.StageExecution
 
-import java.util.concurrent.TimeUnit
+//import java.util.concurrent.TimeUnit
 import com.netflix.spinnaker.orca.clouddriver.utils.HealthHelper
 import com.netflix.spinnaker.orca.clouddriver.utils.HealthHelper.HealthCountSnapshot
 import groovy.util.logging.Slf4j
-import org.slf4j.MDC
+//import org.slf4j.MDC
 import org.springframework.stereotype.Component
 
 @Component
@@ -238,19 +238,19 @@ class WaitForUpInstancesTask extends AbstractWaitingForInstancesTask {
 
     def cloudProvider = stage.context.cloudProvider
 
-    Optional<String> taskStartTime = Optional.ofNullable(MDC.get("taskStartTime"));
-    if (taskStartTime.isPresent()) {
-      if (System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(10) > Long.valueOf(taskStartTime.get())) {
-        // expectation is reconciliation has happened within 10 minutes and that the
-        // current server group capacity should be preferred
-        log.warn(
-          "Short circuiting initial target capacity determination after 10 minutes (serverGroup: {}, executionId: {})",
-          "${cloudProvider}:${serverGroup.region}:${serverGroup.name}",
-          stage.execution.id
-        )
-        return serverGroupCapacity
-      }
-    }
+//    Optional<String> taskStartTime = Optional.ofNullable(MDC.get("taskStartTime"));
+//    if (taskStartTime.isPresent()) {
+//      if (System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(10) > Long.valueOf(taskStartTime.get())) {
+//        // expectation is reconciliation has happened within 10 minutes and that the
+//        // current server group capacity should be preferred
+//        log.warn(
+//          "Short circuiting initial target capacity determination after 10 minutes (serverGroup: {}, executionId: {})",
+//          "${cloudProvider}:${serverGroup.region}:${serverGroup.name}",
+//          stage.execution.id
+//        )
+//        return serverGroupCapacity
+//      }
+//    }
 
     def initialTargetCapacity = getInitialTargetCapacity(stage, serverGroup)
     if (!initialTargetCapacity) {
